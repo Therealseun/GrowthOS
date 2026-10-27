@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Growth OS connects Nigerian students and NYSC corps members to practical skills, career development, creative opportunities and business support.">
+    <meta name="theme-color" content="#0f3b2a">
+    <meta property="og:title" content="Growth OS | Learn. Earn. Build. Grow.">
+    <meta property="og:description" content="Explore practical opportunities, skills and support for students and NYSC corps members.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Growth OS | Learn. Earn. Build. Grow.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f3b2a',
+                            light: '#e8f5ed',
+                            accent: '#26a67a',
+                            nav: '#1f4836'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        handwriting: ['Caveat', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #333; background-color: #fff; -webkit-font-smoothing: antialiased; }
+        .hidden-page { display: none !important; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Form styling */
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.2s;
+            font-size: 16px; /* Prevents iOS zoom on focus */
+            background-color: #fff;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #26a67a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(38, 166, 122, 0.1);
+        }
+        .form-section-title {
+            color: #0f3b2a;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .required-asterisk { color: #ef4444; }
+        
+        /* Checkbox & Radio styling */
+        input[type="checkbox"], input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            accent-color: #26a67a;
+        }
+        
+        /* NYSC Specific coloring */
+        .nysc-theme .form-section-title { color: #1e3a8a; }
+        .nysc-theme input:focus, .nysc-theme select:focus, .nysc-theme textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .nysc-theme input[type="checkbox"], .nysc-theme input[type="radio"] {
+            accent-color: #2563eb;
+        }
+        
+        /* Image fallback styles */
+        img { max-width: 100%; }
+        button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+            outline: 3px solid #26a67a;
+            outline-offset: 3px;
+        }
+        button:disabled { opacity: .7; cursor: wait; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        }
+        .img-fallback {
+            background-color: #e8f5ed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #26a67a;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden w-full">
+
+    <!-- Navigation -->
+    <nav class="flex items-center justify-between px-4 md:px-12 py-4 sticky top-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="navigate('home-page')">
+            <span class="text-xl md:text-2xl font-bold text-brand-dark tracking-tight">Growth <span class="text-brand-accent">OS</span></span>
+        </div>
+        
+        <div class="hidden md:flex gap-8 text-sm font-medium text-gray-600">
+            <a href="#" class="text-brand-dark border-b-2 border-brand-accent pb-1">Home</a>
+            <a href="#" class="hover:text-brand-accent transition-colors">About</a>
+            <div class="flex items-center gap-1 cursor-pointer hover:text-brand-accent transition-colors">
+                For You <i class="fa-solid fa-chevron-down text-[10px]"></i>
+            </div>
+            <a href="#" class="hover:text-brand-accent transition-colors">FAQs</a>
+        </div>
+        
+        <button onclick="navigate('home-page')" class="bg-[#0f3b2a] text-white px-5 py-2 md:px-6 md:py-2.5 rounded-full text-sm font-medium hover:bg-[#1a513b] transition-all flex items-center gap-2">
+            Get Started <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full relative">
+        
+        <!-- ================= HOME PAGE ================= -->
+        <div id="home-page" class="w-full fade-in">
+            
+            <!-- Hero Section -->
+            <section class="px-4 md:px-12 pt-10 md:pt-16 pb-12 w-full flex flex-col md:flex-row items-center gap-10 max-w-7xl mx-auto">
+                <!-- Text Container - Made first so it stacks on top on mobile -->
+                <div class="w-full md:w-1/2 z-10 md:pr-4 text-center md:text-left">
+                    <p class="text-brand-accent font-semibold tracking-widest text-xs mb-4 md:mb-6 uppercase">Students / NYSC</p>
+                    <h1 class="text-4xl md:text-[4rem] font-bold text-brand-dark leading-[1.15] md:leading-[1.1] mb-4 md:mb-6">
+                        Your Goals.<br />
+                        Our Support.<br />
+                        <span class="text-brand-accent">Real Opportunities.</span>
+                    </h1>
+                    <p class="text-gray-600 mb-8 max-w-md mx-auto md:mx-0 text-sm md:text-[15px] leading-relaxed">
+                        Growth OS connects students and corps members to practical opportunities, skills and resources that help you learn, earn, build and grow — today and beyond.
+                    </p>
+                    <button class="bg-[#0f3b2a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-[#1a513b] transition-all inline-flex items-center gap-3 w-fit mx-auto md:mx-0">
+                        Explore Your Path <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Image Container -->
+                <div class="w-full md:w-1/2 relative flex justify-center md:justify-end h-[350px] md:h-[500px] mt-8 md:mt-0">
+                    <!-- Background Shape -->
+                    <div class="absolute inset-0 bg-[#e8f5ed]/50 rounded-bl-[60px] md:rounded-bl-[100px] md:-mr-12 -z-10"></div>
+                    
+                    <div class="relative w-[90%] md:w-full max-w-[600px] h-full flex justify-end">
+                        <!-- Hero Image Using Local Path to prevent broken image icons -->
+                        <div class="w-full md:w-[95%] h-full md:h-[90%] rounded-3xl md:rounded-t-3xl md:rounded-b-none absolute bottom-0 right-0 shadow-xl z-10 overflow-hidden bg-[#e8f5ed]">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="University students learning and collaborating on campus" class="object-cover w-full h-full" fetchpriority="high" decoding="async" onerror="this.style.display='none'; this.parentElement.classList.add('img-fallback'); this.parentElement.setAttribute('aria-label','Growth OS supports students and corps members');" />
+                        </div>
+                        
+                        <!-- Floating Text Overlay -->
+                        <div class="absolute top-4 right-0 md:top-10 md:right-4 z-20 text-2xl md:text-3xl font-handwriting text-brand-dark transform rotate-[-5deg] leading-tight bg-white/80 p-2 md:p-3 rounded-xl backdrop-blur-md shadow-sm border border-white/50">
+                            Learn<br/>Earn<br/>Build<br/>Grow
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pathways Section -->
+            <section class="bg-[#f8f9fa] py-16 md:py-20 px-4 md:px-12 w-full border-t border-gray-100">
+                <div class="max-w-6xl mx-auto">
+                    <p class="text-brand-accent font-semibold tracking-widest text-xs mb-3 uppercase text-center md:text-left">Two Pathways. Endless Possibilities.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4 text-center md:text-left">Choose Your Path</h2>
+                    <p class="text-gray-500 mb-12 max-w-xl text-sm md:text-[15px] text-center md:text-left mx-auto md:mx-0">
+                        Whether you're in school or serving your country, we've got you covered. Pick the path that fits your current stage and goals.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6 relative z-10">
+                        <!-- Student Card -->
+                        <div class="bg-[#f2f9f5] rounded-3xl p-6 md:p-10 relative overflow-hidden transition-transform hover:-translate-y-1 cursor-pointer min-h-[380px]" onclick="navigate('student-page')">
+                            <!-- Student Image -->
+                            <div class="absolute bottom-0 right-0 w-48 md:w-56 h-56 md:h-64 z-0 bg-[#c5e3d4] rounded-tl-[100px] overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Young professionals collaborating on career goals" class="w-full h-full object-cover opacity-90 border-l-4 border-t-4 border-white" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.classList.add('img-fallback');" />
+                            </div>
+                            
+                            <div class="relative z-10 w-full h-full flex flex-col items-start bg-gradient-to-r from-[#f2f9f5] via-[#f2f9f5]/95 to-transparent pr-16 md:pr-20">
+                                <div class="w-10 h-10 bg-white text-[#26a67a] rounded-lg flex items-center justify-center mb-6 shadow-sm">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-brand-dark mb-2">For Students</h3>
+                                <p class="text-[#26a67a] text-xs md:text-sm mb-4 font-semibold">Learn. Earn. Build. Grow.</p>
+                                <p class="text-gray-700 mb-10 max-w-[200px] md:max-w-[240px] text-xs md:text-sm leading-relaxed font-medium">
+                                    Access opportunities to boost your skills, earn income, explore entrepreneurship and get closer to your future — while you're still in school.
+                                </p>
+                                <button class="mt-auto border border-brand-dark text-brand-dark bg-white px-4 py-2 md:px-5 md:py-2 rounded-full text-xs font-semibold hover:bg-brand-dark hover:text-white transition-colors flex items-center gap-2">
+                                    Explore Students Path <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- NYSC Card -->
+                        <div class="bg-[#eff6ff] rounded-3xl p-6 md:p-10 relative overflow-hidden transition-transform hover:-translate-y-1 cursor-pointer min-h-[380px]" onclick="navigate('nysc-page')">
+                            <!-- NYSC Member Image -->
+                            <div class="absolute bottom-0 right-0 w-48 md:w-56 h-56 md:h-64 z-0 bg-[#bfdbfe] rounded-tl-[100px] overflow-hidden">
+                                <img src="https://www.corperone.com/assets/hero-corper-D6vJbDPQ.jpg" alt="Nigerian NYSC corps member in service uniform" class="w-full h-full object-cover opacity-90 border-l-4 border-t-4 border-white" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.classList.add('img-fallback');" />
+                            </div>
+                            
+                            <div class="relative z-10 w-full h-full flex flex-col items-start bg-gradient-to-r from-[#eff6ff] via-[#eff6ff]/95 to-transparent pr-16 md:pr-20">
+                                <div class="w-10 h-10 bg-white text-blue-500 rounded-lg flex items-center justify-center mb-6 shadow-sm">
+                                    <i class="fa-regular fa-user"></i>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-brand-dark mb-2">For NYSC Corps Members</h3>
+                                <p class="text-blue-600 text-xs md:text-sm mb-4 font-semibold">Gain Skills. Find Opportunities.</p>
+                                <p class="text-gray-700 mb-10 max-w-[200px] md:max-w-[280px] text-xs md:text-sm leading-relaxed font-medium">
+                                    Get connected to employment opportunities, creative career paths and business support designed to help you make the most of your service year.
+                                </p>
+                                <button class="mt-auto border border-gray-300 text-gray-700 bg-white px-4 py-2 md:px-5 md:py-2 rounded-full text-xs font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2">
+                                    Explore NYSC Path <i class="fa-solid fa-arrow-right text-gray-400"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Features Section -->
+            <section class="py-16 md:py-20 px-4 md:px-6 max-w-6xl mx-auto text-center border-b border-gray-100">
+                <p class="text-[#26a67a] font-semibold tracking-widest text-[10px] mb-3 uppercase">Why Growth OS?</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-brand-dark mb-4">More Than Just Opportunities.</h2>
+                <p class="text-gray-500 mb-12 md:mb-16 text-sm max-w-xl mx-auto">
+                    Growth OS gives you access to the right tools, guidance and support at every stage of your journey.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 text-center md:text-left px-4">
+                    <div class="bg-gray-50 p-6 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                        <div class="text-[#26a67a] text-2xl mb-4"><i class="fa-solid fa-bullseye"></i></div>
+                        <h4 class="font-bold text-sm text-brand-dark mb-2">Real Opportunities</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">Access work, creator and business opportunities across our ecosystem.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                        <div class="text-[#26a67a] text-2xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
+                        <h4 class="font-bold text-sm text-brand-dark mb-2">Practical Skills</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">Build in-demand skills for today's digital and job markets.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                        <div class="text-[#26a67a] text-2xl mb-4"><i class="fa-regular fa-compass"></i></div>
+                        <h4 class="font-bold text-sm text-brand-dark mb-2">Personalised Guidance</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">Get the right support based on your goals and interests.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                        <div class="text-[#26a67a] text-2xl mb-4"><i class="fa-solid fa-leaf"></i></div>
+                        <h4 class="font-bold text-sm text-brand-dark mb-2">A Stronger Future</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">Turn your potential into lasting career, income and business growth.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="py-12 md:py-16 px-4 md:px-6 max-w-6xl mx-auto">
+                <div class="bg-[#0f3b2a] rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#1a513b] rounded-full opacity-50"></div>
+                    <div class="relative z-10 text-center md:text-left mb-8 md:mb-0">
+                        <p class="text-[#26a67a] font-semibold tracking-widest text-[10px] mb-2 uppercase">Ready to get started?</p>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">Your Growth Journey Starts Here.</h2>
+                        <p class="text-gray-300 text-sm max-w-md mx-auto md:mx-0">
+                            Join Growth OS today and take the next step towards building the skills, opportunities and future you want.
+                        </p>
+                    </div>
+                    <button class="relative z-10 bg-white text-brand-dark px-8 py-3 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 whitespace-nowrap">
+                        Get Started <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= STUDENT REGISTRATION FORM PAGE ================= -->
+        <div id="student-page" class="hidden-page fade-in w-full bg-[#f8f9fa] py-8 md:py-12 px-4 flex-grow min-h-screen">
+            <div class="max-w-3xl mx-auto">
+                <button type="button" onclick="navigate('home-page')" class="text-gray-500 hover:text-brand-dark text-sm mb-6 flex items-center gap-2 font-medium transition-colors bg-white px-4 py-2 rounded-full shadow-sm md:bg-transparent md:shadow-none md:px-0">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </button>
+                
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-[#f2f9f5] p-6 md:p-8 border-b border-[#e5f0ea] flex items-center justify-between">
+                        <div>
+                            <div class="inline-block px-3 py-1 bg-white text-[#26a67a] rounded-md text-[10px] font-bold mb-3 shadow-sm uppercase tracking-wider">Students Path</div>
+                            <h2 class="text-xl md:text-2xl font-bold text-brand-dark">Growth OS Students Registration</h2>
+                            <p class="text-xs md:text-sm text-gray-500 mt-2">Please fill in your details accurately.</p>
+                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white text-[#26a67a] rounded-full flex items-center justify-center shadow-sm text-xl md:text-2xl shrink-0 ml-4">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                    
+                    <form id="form-student" class="p-6 md:p-8 space-y-8 md:space-y-10">
+                        <!-- Student Form fields (same as previous) -->
+                        <section>
+                            <h3 class="form-section-title">Section A: Personal Information</h3>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
+                                <div><label class="form-label">1. Full Name <span class="required-asterisk">*</span></label><input type="text" name="fullname" required placeholder="E.g. John Doe"></div>
+                                <div><label class="form-label">2. Email Address <span class="required-asterisk">*</span></label><input type="email" name="email" required placeholder="E.g. john@example.com"></div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
+                                <div><label class="form-label">3. Phone Number (WhatsApp) <span class="required-asterisk">*</span></label><input type="tel" name="phone" required placeholder="E.g. +234..."></div>
+                                <div><label class="form-label">4. Gender <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><select name="gender" class="bg-white"><option value="">Select gender</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                                <div><label class="form-label">5. State of Residence <span class="required-asterisk">*</span></label><input type="text" name="state" required placeholder="E.g. Lagos"></div>
+                                <div><label class="form-label">6. Local Government Area <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><input type="text" name="lga" placeholder="E.g. Ikeja"></div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section B: Education</h3>
+                            <div class="mb-5 md:mb-6"><label class="form-label">7. Name of Institution <span class="required-asterisk">*</span></label><input type="text" name="institution" required placeholder="E.g. University of Lagos"></div>
+                            <div class="mb-5 md:mb-6">
+                                <label class="form-label">8. Institution Type <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="inst_type" value="University" required> <span class="text-sm font-medium">University</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="inst_type" value="Polytechnic" required> <span class="text-sm font-medium">Polytechnic</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="inst_type" value="College of Education" required> <span class="text-sm font-medium">College of Education</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="inst_type" value="Other" required> <span class="text-sm font-medium">Other</span></label>
+                                </div>
+                            </div>
+                            <div class="mb-5 md:mb-6"><label class="form-label">9. Course of Study <span class="required-asterisk">*</span></label><input type="text" name="course" required placeholder="E.g. Computer Science"></div>
+                            <div class="mb-5 md:mb-6">
+                                <label class="form-label">10. Current Level <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="100 Level / ND I" required> <span class="text-sm font-medium">100 Level / ND I</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="200 Level / ND II" required> <span class="text-sm font-medium">200 Level / ND II</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="300 Level" required> <span class="text-sm font-medium">300 Level</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="400 Level" required> <span class="text-sm font-medium">400 Level</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="500 Level or above" required> <span class="text-sm font-medium">500 Level or above</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="HND" required> <span class="text-sm font-medium">HND</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="level" value="Other" required> <span class="text-sm font-medium">Other</span></label>
+                                </div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                                <div><label class="form-label">11. Expected Graduation Year <span class="required-asterisk">*</span></label><input type="number" name="grad_year" required placeholder="YYYY" min="2020" max="2035"></div>
+                                <div>
+                                    <label class="form-label">12. Student Status <span class="required-asterisk">*</span></label>
+                                    <select name="status" class="bg-white" required>
+                                        <option value="">Select status</option><option value="Currently enrolled">Currently enrolled</option><option value="Awaiting admission">Awaiting admission</option><option value="Recently graduated">Recently graduated</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section C: Your Interests</h3>
+                            <div class="mb-6 md:mb-8">
+                                <label class="form-label">13. What would you like Growth OS to help you with? <span class="required-asterisk">*</span></label>
+                                <p class="text-xs text-gray-500 mb-3 italic">(Select at least 2)</p>
+                                <div class="space-y-3">
+                                    <label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input type="checkbox" name="interests" value="Getting you trained and finding a remote job or internship" class="mt-1"> <span class="text-sm font-medium text-gray-700">Getting you trained and finding you a remote job or internship.</span></label>
+                                    <label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input type="checkbox" name="interests" value="Building career in content creation and monetising" class="mt-1"> <span class="text-sm font-medium text-gray-700">Building your career in content creation and monetising your content.</span></label>
+                                    <label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input type="checkbox" name="interests" value="Starting and growing business and marketing" class="mt-1"> <span class="text-sm font-medium text-gray-700">Starting and growing your business and helping you with marketing your products.</span></label>
+                                </div>
+                            </div>
+                            <div class="mb-5 md:mb-6">
+                                <label class="form-label">14. Do you currently have any professional or digital skills? <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="has_skills" value="Yes" required> <span class="text-sm font-medium">Yes</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="has_skills" value="No" required> <span class="text-sm font-medium">No</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="has_skills" value="Currently learning" required> <span class="text-sm font-medium">Currently learning</span></label>
+                                </div>
+                            </div>
+                            <div class="mb-5 md:mb-6"><label class="form-label">15. If yes, list your skills. <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><textarea name="skills_list" rows="2" placeholder="E.g. Video editing, Graphic design, Copywriting..."></textarea></div>
+                            <div>
+                                <label class="form-label">16. Do you have previous work or internship experience? <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="exp" value="Yes" required> <span class="text-sm font-medium">Yes</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="exp" value="No" required> <span class="text-sm font-medium">No</span></label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section D: Participation</h3>
+                            <div>
+                                <label class="form-label">17. How did you hear about Growth OS? <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="hear" value="Social Media" required> <span class="text-sm font-medium">Social Media</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="hear" value="WhatsApp" required> <span class="text-sm font-medium">WhatsApp</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="hear" value="School or Campus Representative" required> <span class="text-sm font-medium">School or Campus Representative</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="hear" value="Friend or Referral" required> <span class="text-sm font-medium">Friend or Referral</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="hear" value="Online Search" required> <span class="text-sm font-medium">Online Search</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="hear" value="Other" required> <span class="text-sm font-medium">Other</span></label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="pt-6 border-t border-gray-100">
+                            <label class="flex items-start gap-3 cursor-pointer p-4 md:p-5 bg-gray-50 rounded-xl mb-6 border border-gray-200">
+                                <input type="checkbox" name="declaration" value="confirmed" required class="mt-1">
+                                <span class="text-gray-700 text-sm md:text-[15px] font-medium leading-relaxed">
+                                    I confirm that the information provided is accurate and understand that registration does not guarantee employment, income, scholarships, or other opportunities.
+                                </span>
+                            </label>
+                            
+                            <button type="submit" class="w-full bg-[#0f3b2a] text-white py-4 md:py-5 rounded-xl font-bold text-[15px] md:text-lg hover:bg-[#1a513b] transition-all shadow-md flex justify-center items-center gap-2">
+                                Register for Growth OS Students
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= NYSC REGISTRATION FORM PAGE ================= -->
+        <div id="nysc-page" class="hidden-page fade-in w-full bg-[#f8f9fa] py-8 md:py-12 px-4 flex-grow min-h-screen nysc-theme">
+            <div class="max-w-3xl mx-auto">
+                <button type="button" onclick="navigate('home-page')" class="text-gray-500 hover:text-blue-900 text-sm mb-6 flex items-center gap-2 font-medium transition-colors bg-white px-4 py-2 rounded-full shadow-sm md:bg-transparent md:shadow-none md:px-0">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </button>
+                
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-[#eff6ff] p-6 md:p-8 border-b border-[#bfdbfe] flex items-center justify-between">
+                        <div>
+                            <div class="inline-block px-3 py-1 bg-white text-blue-600 rounded-md text-[10px] font-bold mb-3 shadow-sm uppercase tracking-wider">NYSC Path</div>
+                            <h2 class="text-xl md:text-2xl font-bold text-[#1e3a8a]">Growth OS NYSC Registration</h2>
+                            <p class="text-xs md:text-sm text-gray-500 mt-2">Connect to employment opportunities.</p>
+                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white text-blue-600 rounded-full flex items-center justify-center shadow-sm text-xl md:text-2xl shrink-0 ml-4">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                    </div>
+                    
+                    <form id="form-nysc" class="p-6 md:p-8 space-y-8 md:space-y-10">
+                        <!-- NYSC Form fields (same as previous) -->
+                        <section>
+                            <h3 class="form-section-title">Section A: Personal Information</h3>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
+                                <div><label class="form-label">1. Full Name <span class="required-asterisk">*</span></label><input type="text" name="fullname" required placeholder="E.g. John Doe"></div>
+                                <div><label class="form-label">2. Email Address <span class="required-asterisk">*</span></label><input type="email" name="email" required placeholder="E.g. john@example.com"></div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
+                                <div><label class="form-label">3. Phone Number (WhatsApp) <span class="required-asterisk">*</span></label><input type="tel" name="phone" required placeholder="E.g. +234..."></div>
+                                <div><label class="form-label">4. Gender <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><select name="gender" class="bg-white"><option value="">Select gender</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                                <div><label class="form-label">5. State of Residence <span class="required-asterisk">*</span></label><input type="text" name="state" required placeholder="E.g. Lagos"></div>
+                                <div><label class="form-label">6. Local Government Area <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><input type="text" name="lga" placeholder="E.g. Ikeja"></div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section B: NYSC Information</h3>
+                            <div class="mb-5 md:mb-6">
+                                <label class="form-label">7. NYSC Status <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="nysc_status" value="Preparing for NYSC" required> <span class="text-sm font-medium">Preparing for NYSC</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="nysc_status" value="Currently serving" required> <span class="text-sm font-medium">Currently serving</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="nysc_status" value="Recently completed NYSC" required> <span class="text-sm font-medium">Recently completed NYSC</span></label>
+                                </div>
+                            </div>
+                            <div class="mb-5 md:mb-6"><label class="form-label">8. NYSC State of Deployment <span class="text-gray-400 font-normal text-xs ml-1">(For serving corps members)</span></label><input type="text" name="deployment" placeholder="E.g. Abuja"></div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                                <div><label class="form-label">9. Place of Primary Assignment (PPA) <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><input type="text" name="ppa" placeholder="Company/School name"></div>
+                                <div><label class="form-label">11. Batch and Stream <span class="text-gray-400 font-normal text-xs ml-1">(Where applicable)</span></label><input type="text" name="batch" placeholder="E.g. Batch B Stream 2"></div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section C: Education and Professional Background</h3>
+                            <div class="mb-5 md:mb-6"><label class="form-label">12. Institution Attended <span class="required-asterisk">*</span></label><input type="text" name="inst" required placeholder="University/Polytechnic name"></div>
+                            <div class="mb-5 md:mb-6">
+                                <label class="form-label">13. Qualification <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="qual" value="OND" required> <span class="text-sm font-medium">OND</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="qual" value="HND" required> <span class="text-sm font-medium">HND</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="qual" value="B.Sc./B.A./B.Ed." required> <span class="text-sm font-medium">B.Sc./B.A./B.Ed.</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="qual" value="B.Eng./B.Tech." required> <span class="text-sm font-medium">B.Eng./B.Tech.</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="qual" value="Other" required> <span class="text-sm font-medium">Other</span></label>
+                                </div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-6 md:mb-8">
+                                <div><label class="form-label">14. Course of Study <span class="required-asterisk">*</span></label><input type="text" name="course" required placeholder="E.g. Economics"></div>
+                                <div><label class="form-label">15. Graduation Year <span class="required-asterisk">*</span></label><input type="number" name="grad_year" required placeholder="YYYY"></div>
+                            </div>
+                            <div>
+                                <label class="form-label">16. Current Professional Skills <span class="text-gray-500 font-normal text-xs ml-1">(Select all that apply.)</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 bg-gray-50 p-4 md:p-5 rounded-xl border border-gray-200">
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Writing and Communication"> <span class="text-sm font-medium">Writing and Communication</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Administration and Virtual Assistance"> <span class="text-sm font-medium">Administration and Virtual Assistance</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Graphic Design"> <span class="text-sm font-medium">Graphic Design</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Video Editing"> <span class="text-sm font-medium">Video Editing</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Content Creation"> <span class="text-sm font-medium">Content Creation</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Social Media Management"> <span class="text-sm font-medium">Social Media Management</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Digital Marketing"> <span class="text-sm font-medium">Digital Marketing</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Software Development"> <span class="text-sm font-medium">Software Development</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Data Analysis"> <span class="text-sm font-medium">Data Analysis</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Sales and Business Development"> <span class="text-sm font-medium">Sales and Business Development</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Teaching and Training"> <span class="text-sm font-medium">Teaching and Training</span></label>
+                                    <label class="flex items-center gap-3"><input type="checkbox" name="prof_skills" value="Other"> <span class="text-sm font-medium">Other</span></label>
+                                    <label class="flex items-center gap-3 sm:col-span-2 mt-2 pt-3 border-t border-gray-200"><input type="checkbox" name="prof_skills" value="No professional skills yet"> <span class="text-sm font-bold">No professional skills yet</span></label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section D: Career and Growth Interests</h3>
+                            <div class="mb-6 md:mb-8">
+                                <label class="form-label">17. What would you like Growth OS to help you with? <span class="required-asterisk">*</span></label>
+                                <p class="text-xs text-gray-500 mb-3 italic">(Select at least 2)</p>
+                                <div class="space-y-3">
+                                    <label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input type="checkbox" name="interests" value="Getting you trained and finding a remote job or internship" class="mt-1"> <span class="text-sm font-medium text-gray-700">Getting you trained and finding you a remote job or internship.</span></label>
+                                    <label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input type="checkbox" name="interests" value="Building career in content creation and monetising" class="mt-1"> <span class="text-sm font-medium text-gray-700">Building your career in content creation and monetising your content.</span></label>
+                                    <label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input type="checkbox" name="interests" value="Starting and growing business and marketing" class="mt-1"> <span class="text-sm font-medium text-gray-700">Starting and growing your business and helping you with marketing your products.</span></label>
+                                </div>
+                            </div>
+                            <div class="mb-5 md:mb-6">
+                                <label class="form-label">18. What is your primary goal? <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="goal" value="Secure employment after NYSC" required> <span class="text-sm font-medium">Secure employment after NYSC</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="goal" value="Find remote work" required> <span class="text-sm font-medium">Find remote work</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="goal" value="Develop professional skills" required> <span class="text-sm font-medium">Develop professional skills</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="goal" value="Build a portfolio" required> <span class="text-sm font-medium">Build a portfolio</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="goal" value="Start or grow a business" required> <span class="text-sm font-medium">Start or grow a business</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="goal" value="Earn through creative work" required> <span class="text-sm font-medium">Earn through creative work</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50 sm:col-span-2"><input type="radio" name="goal" value="Explore multiple opportunities" required> <span class="text-sm font-medium">Explore multiple opportunities</span></label>
+                                </div>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                                <div>
+                                    <label class="form-label">19. Do you have previous work experience? <span class="required-asterisk">*</span></label>
+                                    <div class="grid grid-cols-2 gap-3 mt-2">
+                                        <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="exp" value="Yes" required> <span class="text-sm font-medium">Yes</span></label>
+                                        <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="exp" value="No" required> <span class="text-sm font-medium">No</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">20. Do you currently have a CV? <span class="required-asterisk">*</span></label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                        <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="cv" value="Yes" required> <span class="text-sm font-medium">Yes</span></label>
+                                        <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="cv" value="No" required> <span class="text-sm font-medium">No</span></label>
+                                        <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="cv" value="Needs updating" required> <span class="text-sm font-medium">Needs updating</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h3 class="form-section-title">Section E: Participation</h3>
+                            <div>
+                                <label class="form-label">21. How did you hear about Growth OS? <span class="required-asterisk">*</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="Social Media" required> <span class="text-sm font-medium">Social Media</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="WhatsApp" required> <span class="text-sm font-medium">WhatsApp</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="Fellow Corps Member" required> <span class="text-sm font-medium">Fellow Corps Member</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="CDS Group" required> <span class="text-sm font-medium">CDS Group</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="Friend or Referral" required> <span class="text-sm font-medium">Friend or Referral</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="Online Search" required> <span class="text-sm font-medium">Online Search</span></label>
+                                    <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="hear" value="Other" required> <span class="text-sm font-medium">Other</span></label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="pt-6 border-t border-gray-100">
+                            <label class="flex items-start gap-3 cursor-pointer p-4 md:p-5 bg-blue-50 rounded-xl mb-6 border border-blue-200">
+                                <input type="checkbox" name="declaration" value="confirmed" required class="mt-1">
+                                <span class="text-gray-700 text-sm md:text-[15px] font-medium leading-relaxed">
+                                    I confirm that the information provided is accurate and understand that registration does not guarantee employment, income, or any specific opportunity.
+                                </span>
+                            </label>
+                            
+                            <button type="submit" class="w-full bg-[#1e3a8a] text-white py-4 md:py-5 rounded-xl font-bold text-[15px] md:text-lg hover:bg-blue-900 transition-all shadow-md flex justify-center items-center gap-2">
+                                Register for Growth OS NYSC
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 py-10 px-6 mt-auto bg-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-6">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-800 text-lg tracking-tight">Growth <span class="text-brand-accent">OS</span></span>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 font-medium text-xs uppercase tracking-wider">
+                <a href="#" class="hover:text-brand-dark transition-colors">Home</a>
+                <a href="#" class="hover:text-brand-dark transition-colors">About</a>
+                <a href="#" class="hover:text-brand-dark transition-colors">For You</a>
+                <a href="#" class="hover:text-brand-dark transition-colors">FAQs</a>
+            </div>
+            
+            <div class="flex gap-4 text-lg">
+                <a href="#" class="text-gray-400 hover:text-brand-dark transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-dark transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-dark transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-brand-dark transition-colors"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-4 text-center md:text-left">
+            <p>© 2026 Growth OS. An Initiative of 1800 Holdings Limited.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-gray-600">Privacy</a>
+                <a href="#" class="hover:text-gray-600">Terms</a>
+                <a href="#" class="hover:text-gray-600">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+/* Growth OS interactions
+ * Registration submissions are sent to the Growth OS Google Apps Script endpoint.
+ */
+(function () {
+  "use strict";
+
+  const PAGE_IDS = ["home-page", "student-page", "nysc-page"];
+  const REGISTRATION_API_URL = "https://script.google.com/macros/s/AKfycbxJJsfUhuPTtKwCx-YUtDmHR03GKkt2wS3fWpzZrg4IL0mKlk1-t8_umBecjvYT_BkB/exec";
+
+  function navigate(pageId) {
+    if (!PAGE_IDS.includes(pageId)) pageId = "home-page";
+    PAGE_IDS.forEach((id) => {
+      const page = document.getElementById(id);
+      if (!page) return;
+      page.classList.toggle("hidden-page", id !== pageId);
+      page.setAttribute("aria-hidden", id !== pageId ? "true" : "false");
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.title = pageId === "student-page"
+      ? "Student Registration | Growth OS"
+      : pageId === "nysc-page"
+        ? "NYSC Registration | Growth OS"
+        : "Growth OS";
+  }
+  window.navigate = navigate;
+
+  function showMessage(form, message, type) {
+    let notice = form.querySelector(".form-feedback");
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.className = "form-feedback rounded-xl p-4 text-sm font-medium mb-5";
+      notice.setAttribute("role", "status");
+      notice.setAttribute("aria-live", "polite");
+      form.prepend(notice);
+    }
+    notice.className = "form-feedback rounded-xl p-4 text-sm font-medium mb-5 " +
+      (type === "success" ? "bg-green-50 text-green-800 border border-green-200" :
+        "bg-red-50 text-red-700 border border-red-200");
+    notice.textContent = message;
+    notice.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function getFormData(form) {
+    const data = {};
+    new FormData(form).forEach((value, key) => {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        if (!Array.isArray(data[key])) data[key] = [data[key]];
+        data[key].push(value);
+      } else {
+        data[key] = value;
+      }
+    });
+    data.submittedAt = new Date().toISOString();
+    return data;
+  }
+
+  async function setupRegistrationForm(formId, registrationType, minInterests) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    const interestBoxes = Array.from(form.querySelectorAll('input[name="interests"]'));
+    interestBoxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const notice = form.querySelector(".form-feedback");
+        if (notice && notice.classList.contains("bg-red-50")) notice.remove();
+      });
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const selectedInterests = interestBoxes.filter((box) => box.checked);
+      if (selectedInterests.length < minInterests) {
+        showMessage(form, `Please select at least ${minInterests} interests before submitting.`, "error");
+        const firstUnchecked = interestBoxes.find((box) => !box.checked);
+        if (firstUnchecked) firstUnchecked.focus({ preventScroll: true });
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton ? submitButton.textContent.trim() : "";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+      }
+
+      try {
+        const record = getFormData(form);
+        record.type = registrationType;
+
+        // Apps Script ContentService does not expose configurable CORS headers.
+        // A text/plain no-cors POST avoids the browser preflight, but the browser
+        // cannot read the final response to verify that the spreadsheet write succeeded.
+        await fetch(REGISTRATION_API_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
+          body: JSON.stringify(record)
+        });
+
+        showMessage(
+          form,
+          "Your registration request has been sent. This page cannot verify Google's final spreadsheet response, so please contact the Growth OS team if you do not receive a follow-up.",
+          "success"
+        );
+        form.reset();
+
+        if (registrationType === "nysc") {
+          const deploymentInput = form.querySelector('input[name="deployment"]');
+          if (deploymentInput) {
+            deploymentInput.required = false;
+            deploymentInput.placeholder = "For serving corps members (e.g. Lagos)";
+          }
+        }
+      } catch (error) {
+        console.error("Growth OS registration submission failed:", error);
+        showMessage(
+          form,
+          "We couldn't send your registration. Please check your internet connection and try again. If the problem continues, contact the Growth OS team.",
+          "error"
+        );
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText || (formId === "form-student"
+            ? "Register for Growth OS Students"
+            : "Register for Growth OS NYSC");
+        }
+      }
+    });
+  }
+
+  function setupNavigation() {
+    // The cards already call navigate inline; make the other primary calls work too.
+    const buttons = Array.from(document.querySelectorAll("button"));
+    buttons.forEach((button) => {
+      const label = button.textContent.replace(/\s+/g, " ").trim().toLowerCase();
+      if (label.includes("explore your path") || label === "get started" ||
+          label.startsWith("get started ")) {
+        button.addEventListener("click", () => {
+          navigate("student-page");
+        });
+      }
+      if (label.includes("explore students path")) {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          navigate("student-page");
+        });
+      }
+      if (label.includes("explore nysc path")) {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          navigate("nysc-page");
+        });
+      }
+    });
+
+    // Make placeholder navigation links useful without sending visitors to "#".
+    document.querySelectorAll('nav a, footer a').forEach((link) => {
+      const label = link.textContent.trim().toLowerCase();
+      if (label === "home") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          navigate("home-page");
+        });
+      } else if (label === "for you") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          navigate("student-page");
+        });
+      } else if (label === "about") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          document.querySelector("#home-page section:nth-of-type(3)")?.scrollIntoView({ behavior: "smooth" });
+        });
+      } else if (label === "faqs") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          alert("FAQs will be available here soon. Please contact the Growth OS team for assistance.");
+        });
+      } else if (["privacy", "terms", "cookies"].includes(label)) {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          alert(`${label.charAt(0).toUpperCase() + label.slice(1)} information will be published here soon.`);
+        });
+      }
+    });
+
+    // Avoid empty placeholder social links navigating the page to its top.
+    document.querySelectorAll("footer .fa-brands").forEach((icon) => {
+      const link = icon.closest("a");
+      if (link) link.addEventListener("click", (event) => {
+        if (link.getAttribute("href") === "#") {
+          event.preventDefault();
+          alert("Add the official Growth OS social profile URL to enable this link.");
+        }
+      });
+    });
+  }
+
+  function setupPhoneAndYearHints() {
+    const nyscForm = document.getElementById("form-nysc");
+    if (nyscForm) {
+      const statusOptions = nyscForm.querySelectorAll('input[name="nysc_status"]');
+      const deploymentInput = nyscForm.querySelector('input[name="deployment"]');
+      const updateDeploymentRequirement = () => {
+        const status = nyscForm.querySelector('input[name="nysc_status"]:checked')?.value;
+        if (deploymentInput) {
+          deploymentInput.required = status === "Currently serving";
+          deploymentInput.placeholder = status === "Currently serving"
+            ? "Required for serving corps members (e.g. Lagos)"
+            : "For serving corps members (e.g. Lagos)";
+        }
+      };
+      statusOptions.forEach((option) => option.addEventListener("change", updateDeploymentRequirement));
+      updateDeploymentRequirement();
+    }
+
+    document.querySelectorAll('input[name="grad_year"]').forEach((input) => {
+      input.min = input.min || "1950";
+      input.max = input.max || "2045";
+      input.addEventListener("input", () => {
+        if (input.value && (Number(input.value) < Number(input.min) ||
+            Number(input.value) > Number(input.max))) {
+          input.setCustomValidity(`Enter a year between ${input.min} and ${input.max}.`);
+        } else {
+          input.setCustomValidity("");
+        }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupNavigation();
+    setupRegistrationForm("form-student", "student", 2);
+    setupRegistrationForm("form-nysc", "nysc", 2);
+    setupPhoneAndYearHints();
+    navigate("home-page");
+  });
+})();
+    </script>
+</body>
+</html>
