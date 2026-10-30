@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="assets/growth-os-logo.jpeg">
     <title>Growth OS | Learn. Earn. Build. Grow.</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -104,6 +105,26 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
         }
+
+        /* Growth OS logo */
+        .growth-logo {
+            display: block;
+            width: auto;
+            height: 46px;
+            max-width: 190px;
+            object-fit: contain;
+        }
+        .growth-logo-footer {
+            height: 52px;
+            width: auto;
+            max-width: 210px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 640px) {
+            .growth-logo { height: 38px; max-width: 155px; }
+            .growth-logo-footer { height: 46px; }
+        }
         .social-link { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; color: #fff; transition: .2s; }
         .social-link:hover { background: #26a67a; border-color: #26a67a; transform: translateY(-2px); }
         .whatsapp-float { position: fixed; right: 22px; bottom: 22px; z-index: 80; width: 62px; height: 62px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#20c763; color:#fff; font-size:34px; box-shadow:0 0 0 0 rgba(32,199,99,.65); animation: whatsappPulse 1.8s infinite; text-decoration:none; }
@@ -121,11 +142,12 @@
         }
     </style>
 </head>
+<!-- LOGO SETUP: Save your logo as assets/growth-os-logo.png. Keep the assets folder beside this HTML file. -->
 <body class="min-h-screen flex flex-col relative overflow-x-hidden w-full">
 
     <!-- Responsive Navigation -->
     <nav class="site-nav flex items-center justify-between px-4 md:px-12 py-4 sticky top-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
-        <a href="#home" onclick="event.preventDefault(); navigate('home-page')" class="flex items-center gap-2 font-bold text-2xl text-brand-dark tracking-tight" aria-label="Growth OS home">Growth <span class="text-brand-accent">OS</span></a>
+        <a href="#home" onclick="event.preventDefault(); navigate('home-page')" class="flex items-center" aria-label="Growth OS home"><img src="assets/growth-os-logo.png" alt="Growth OS" class="growth-logo"></a>
         <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
             <a href="#home" onclick="event.preventDefault(); navigate('home-page')" class="hover:text-brand-accent">Home</a>
             <a href="#about" onclick="event.preventDefault(); navigate('home-page'); document.getElementById('about-section')?.scrollIntoView({behavior:'smooth'})" class="hover:text-brand-accent">About</a>
@@ -641,7 +663,7 @@
     <!-- Complete Footer -->
     <footer id="growth-footer" class="bg-[#082d20] text-white pt-14 pb-7 px-5 md:px-10">
       <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div><div class="text-2xl font-extrabold tracking-tight mb-4">Growth <span class="text-[#48c995]">OS</span></div><p class="text-sm leading-7 text-white/70 max-w-xs">Learn. Earn. Build. Grow. Practical skills, opportunities and support for your next step.</p><div class="flex gap-3 mt-6 text-lg">
+        <div><img src="assets/growth-os-logo.png" alt="Growth OS" class="growth-logo-footer"><p class="text-sm leading-7 text-white/70 max-w-xs">Learn. Earn. Build. Grow. Practical skills, opportunities and support for your next step.</p><div class="flex gap-3 mt-6 text-lg">
           <a aria-label="LinkedIn" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
           <a aria-label="Instagram" href="https://www.instagram.com/growth_os1?utm_source=qr&exln=MWx4eXlkbXhieDEzdQ==" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fa-brands fa-instagram"></i></a>
           <a aria-label="Facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
