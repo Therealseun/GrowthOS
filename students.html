@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta content="Register with Growth OS as a student and access practical skills, career and business opportunities." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<meta content="#0f3b2a" name="theme-color"/>
+<meta content="Growth OS | Learn. Earn. Build. Grow." property="og:title"/>
+<meta content="Explore practical opportunities, skills and support for students and NYSC corps members." property="og:description"/>
+<meta content="website" property="og:type"/>
+<link href="https://images.unsplash.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="assets/growth-os-logo.png" rel="icon" type="image/png"/>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Caveat:wght@700&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f3b2a',
+                            light: '#e8f5ed',
+                            accent: '#26a67a',
+                            nav: '#1f4836'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        handwriting: ['Caveat', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; color: #333; background-color: #fff; -webkit-font-smoothing: antialiased; }
+        .hidden-page { display: none !important; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Form styling */
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.2s;
+            font-size: 16px; /* Prevents iOS zoom on focus */
+            background-color: #fff;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #26a67a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(38, 166, 122, 0.1);
+        }
+        .form-section-title {
+            color: #0f3b2a;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .required-asterisk { color: #ef4444; }
+        
+        /* Checkbox & Radio styling */
+        input[type="checkbox"], input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            accent-color: #26a67a;
+        }
+        
+        /* NYSC Specific coloring */
+        .nysc-theme .form-section-title { color: #1e3a8a; }
+        .nysc-theme input:focus, .nysc-theme select:focus, .nysc-theme textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .nysc-theme input[type="checkbox"], .nysc-theme input[type="radio"] {
+            accent-color: #2563eb;
+        }
+        
+        /* Image fallback styles */
+        img { max-width: 100%; }
+        button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+            outline: 3px solid #26a67a;
+            outline-offset: 3px;
+        }
+        button:disabled { opacity: .7; cursor: wait; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        }
+
+        /* Growth OS logo */
+        .growth-logo {
+            display: block;
+            width: auto;
+            height: 70px;
+            max-width: 190px;
+            object-fit: contain;
+        }
+        .growth-logo-footer {
+            height: 70px;
+            width: auto;
+            max-width: 210px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 640px) {
+            .growth-logo { height: 38px; max-width: 155px; }
+            .growth-logo-footer { height: 70px; }
+        }
+        .social-link { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; color: #fff; transition: .2s; }
+        .social-link:hover { background: #26a67a; border-color: #26a67a; transform: translateY(-2px); }
+        .whatsapp-float { position: fixed; right: 22px; bottom: 22px; z-index: 80; width: 62px; height: 62px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#20c763; color:#fff; font-size:34px; box-shadow:0 0 0 0 rgba(32,199,99,.65); animation: whatsappPulse 1.8s infinite; text-decoration:none; }
+        @keyframes whatsappPulse { 0% { box-shadow:0 0 0 0 rgba(32,199,99,.55),0 8px 24px rgba(0,0,0,.2); } 70% { box-shadow:0 0 0 16px rgba(32,199,99,0),0 8px 24px rgba(0,0,0,.2); } 100% { box-shadow:0 0 0 0 rgba(32,199,99,0),0 8px 24px rgba(0,0,0,.2); } }
+        @media(max-width:640px){ .whatsapp-float{width:56px;height:56px;right:16px;bottom:16px;font-size:30px;} }
+        .img-fallback {
+            background-color: #e8f5ed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #26a67a;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+<title>Student Registration | Growth OS</title></head><body class="min-h-screen flex flex-col relative overflow-x-hidden w-full"><nav class="site-nav flex items-center justify-between px-4 md:px-12 py-4 sticky top-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+<a aria-label="Growth OS home" class="flex items-center" href="#home" onclick="event.preventDefault(); navigate('home-page')"><img alt="Growth OS" class="growth-logo" src="assets/growth-os-logo.png"/></a>
+<div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+<a class="hover:text-brand-accent" href="#home" onclick="event.preventDefault(); navigate('home-page')">Home</a>
+<a class="hover:text-brand-accent" href="#about" onclick="event.preventDefault(); navigate('home-page'); document.getElementById('about-section')?.scrollIntoView({behavior:'smooth'})">About</a>
+<a class="hover:text-brand-accent" href="#pathways" onclick="event.preventDefault(); navigate('choose-page')">Choose Your Path</a>
+<a class="hover:text-brand-accent" href="#contact" onclick="event.preventDefault(); document.getElementById('growth-footer')?.scrollIntoView({behavior:'smooth'})">Contact</a>
+</div>
+<div class="flex items-center gap-3">
+<button class="hidden sm:inline-flex bg-[#0f3b2a] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#1a513b]" onclick="navigate('choose-page')" type="button">Get Started <i class="fa-solid fa-arrow-right ml-2"></i></button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="md:hidden w-11 h-11 rounded-xl border border-gray-200 text-brand-dark text-xl" id="menu-toggle" type="button"><i class="fa-solid fa-bars"></i></button>
+</div>
+<div class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg p-5 flex-col gap-4 text-sm font-semibold" id="mobile-menu">
+<a href="#home" onclick="navigate('home-page'); closeMobileMenu()">Home</a>
+<a href="#about" onclick="navigate('home-page'); closeMobileMenu(); document.getElementById('about-section')?.scrollIntoView({behavior:'smooth'})">About</a>
+<a href="#pathways" onclick="navigate('choose-page'); closeMobileMenu()">Choose Your Path</a>
+<a href="#contact" onclick="closeMobileMenu(); document.getElementById('growth-footer')?.scrollIntoView({behavior:'smooth'})">Contact</a>
+<button class="bg-[#0f3b2a] text-white px-5 py-3 rounded-full" onclick="navigate('choose-page'); closeMobileMenu()" type="button">Get Started <i class="fa-solid fa-arrow-right ml-2"></i></button>
+</div>
+</nav><main class="flex-grow w-full relative"><div class="fade-in w-full bg-[#f8f9fa] py-8 md:py-12 px-4 flex-grow min-h-screen" id="student-page">
+<div class="max-w-3xl mx-auto">
+<button class="text-gray-500 hover:text-brand-dark text-sm mb-6 flex items-center gap-2 font-medium transition-colors bg-white px-4 py-2 rounded-full shadow-sm md:bg-transparent md:shadow-none md:px-0" onclick="navigate('home-page')" type="button">
+<i class="fa-solid fa-arrow-left"></i> Back to Home
+                </button>
+<div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+<div class="bg-[#f2f9f5] p-6 md:p-8 border-b border-[#e5f0ea] flex items-center justify-between">
+<div>
+<div class="inline-block px-3 py-1 bg-white text-[#26a67a] rounded-md text-[10px] font-bold mb-3 shadow-sm uppercase tracking-wider">Students Path</div>
+<h2 class="text-xl md:text-2xl font-bold text-brand-dark">Growth OS Students Registration</h2>
+<p class="text-xs md:text-sm text-gray-500 mt-2">Please fill in your details accurately.</p>
+</div>
+<div class="w-12 h-12 md:w-16 md:h-16 bg-white text-[#26a67a] rounded-full flex items-center justify-center shadow-sm text-xl md:text-2xl shrink-0 ml-4">
+<i class="fa-solid fa-graduation-cap"></i>
+</div>
+</div>
+<form class="p-6 md:p-8 space-y-8 md:space-y-10" id="form-student">
+<!-- Student Form fields (same as previous) -->
+<section>
+<h3 class="form-section-title">Section A: Personal Information</h3>
+<div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
+<div><label class="form-label">1. Full Name <span class="required-asterisk">*</span></label><input name="fullname" placeholder="E.g. John Doe" required="" type="text"/></div>
+<div><label class="form-label">2. Email Address <span class="required-asterisk">*</span></label><input name="email" placeholder="E.g. john@example.com" required="" type="email"/></div>
+</div>
+<div class="grid sm:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
+<div><label class="form-label">3. Phone Number (WhatsApp) <span class="required-asterisk">*</span></label><input name="phone" placeholder="E.g. +234..." required="" type="tel"/></div>
+<div><label class="form-label">4. Gender <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><select class="bg-white" name="gender"><option value="">Select gender</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+</div>
+<div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+<div><label class="form-label">5. State of Residence <span class="required-asterisk">*</span></label><input name="state" placeholder="E.g. Lagos" required="" type="text"/></div>
+<div><label class="form-label">6. Local Government Area <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><input name="lga" placeholder="E.g. Ikeja" type="text"/></div>
+</div>
+</section>
+<section>
+<h3 class="form-section-title">Section B: Education</h3>
+<div class="mb-5 md:mb-6"><label class="form-label">7. Name of Institution <span class="required-asterisk">*</span></label><input name="institution" placeholder="E.g. University of Lagos" required="" type="text"/></div>
+<div class="mb-5 md:mb-6">
+<label class="form-label">8. Institution Type <span class="required-asterisk">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="inst_type" required="" type="radio" value="University"/> <span class="text-sm font-medium">University</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="inst_type" required="" type="radio" value="Polytechnic"/> <span class="text-sm font-medium">Polytechnic</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="inst_type" required="" type="radio" value="College of Education"/> <span class="text-sm font-medium">College of Education</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="inst_type" required="" type="radio" value="Other"/> <span class="text-sm font-medium">Other</span></label>
+</div>
+</div>
+<div class="mb-5 md:mb-6"><label class="form-label">9. Course of Study <span class="required-asterisk">*</span></label><input name="course" placeholder="E.g. Computer Science" required="" type="text"/></div>
+<div class="mb-5 md:mb-6">
+<label class="form-label">10. Current Level <span class="required-asterisk">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="100 Level / ND I"/> <span class="text-sm font-medium">100 Level / ND I</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="200 Level / ND II"/> <span class="text-sm font-medium">200 Level / ND II</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="300 Level"/> <span class="text-sm font-medium">300 Level</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="400 Level"/> <span class="text-sm font-medium">400 Level</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="500 Level or above"/> <span class="text-sm font-medium">500 Level or above</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="HND"/> <span class="text-sm font-medium">HND</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="level" required="" type="radio" value="Other"/> <span class="text-sm font-medium">Other</span></label>
+</div>
+</div>
+<div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+<div><label class="form-label">11. Expected Graduation Year <span class="required-asterisk">*</span></label><input max="2035" min="2020" name="grad_year" placeholder="YYYY" required="" type="number"/></div>
+<div>
+<label class="form-label">12. Student Status <span class="required-asterisk">*</span></label>
+<select class="bg-white" name="status" required="">
+<option value="">Select status</option><option value="Currently enrolled">Currently enrolled</option><option value="Awaiting admission">Awaiting admission</option><option value="Recently graduated">Recently graduated</option>
+</select>
+</div>
+</div>
+</section>
+<section>
+<h3 class="form-section-title">Section C: Your Interests</h3>
+<div class="mb-6 md:mb-8">
+<label class="form-label">13. What would you like Growth OS to help you with? <span class="required-asterisk">*</span></label>
+<p class="text-xs text-gray-500 mb-3 italic">(Select at least 2)</p>
+<div class="space-y-3">
+<label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input class="mt-1" name="interests" type="checkbox" value="Getting you trained and finding a remote job or internship"/> <span class="text-sm font-medium text-gray-700">Getting you trained and finding you a remote job or internship.</span></label>
+<label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input class="mt-1" name="interests" type="checkbox" value="Building career in content creation and monetising"/> <span class="text-sm font-medium text-gray-700">Building your career in content creation and monetising your content.</span></label>
+<label class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><input class="mt-1" name="interests" type="checkbox" value="Starting and growing business and marketing"/> <span class="text-sm font-medium text-gray-700">Starting and growing your business and helping you with marketing your products.</span></label>
+</div>
+</div>
+<div class="mb-5 md:mb-6">
+<label class="form-label">14. Do you currently have any professional or digital skills? <span class="required-asterisk">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="has_skills" required="" type="radio" value="Yes"/> <span class="text-sm font-medium">Yes</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="has_skills" required="" type="radio" value="No"/> <span class="text-sm font-medium">No</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="has_skills" required="" type="radio" value="Currently learning"/> <span class="text-sm font-medium">Currently learning</span></label>
+</div>
+</div>
+<div class="mb-5 md:mb-6"><label class="form-label">15. If yes, list your skills. <span class="text-gray-400 font-normal text-xs ml-1">(Optional)</span></label><textarea name="skills_list" placeholder="E.g. Video editing, Graphic design, Copywriting..." rows="2"></textarea></div>
+<div>
+<label class="form-label">16. Do you have previous work or internship experience? <span class="required-asterisk">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="exp" required="" type="radio" value="Yes"/> <span class="text-sm font-medium">Yes</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="exp" required="" type="radio" value="No"/> <span class="text-sm font-medium">No</span></label>
+</div>
+</div>
+</section>
+<section>
+<h3 class="form-section-title">Section D: Participation</h3>
+<div>
+<label class="form-label">17. How did you hear about Growth OS? <span class="required-asterisk">*</span></label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="hear" required="" type="radio" value="Social Media"/> <span class="text-sm font-medium">Social Media</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="hear" required="" type="radio" value="WhatsApp"/> <span class="text-sm font-medium">WhatsApp</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="hear" required="" type="radio" value="School or Campus Representative"/> <span class="text-sm font-medium">School or Campus Representative</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="hear" required="" type="radio" value="Friend or Referral"/> <span class="text-sm font-medium">Friend or Referral</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="hear" required="" type="radio" value="Online Search"/> <span class="text-sm font-medium">Online Search</span></label>
+<label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50"><input name="hear" required="" type="radio" value="Other"/> <span class="text-sm font-medium">Other</span></label>
+</div>
+</div>
+</section>
+<div class="pt-6 border-t border-gray-100">
+<label class="flex items-start gap-3 cursor-pointer p-4 md:p-5 bg-gray-50 rounded-xl mb-6 border border-gray-200">
+<input class="mt-1" name="declaration" required="" type="checkbox" value="confirmed"/>
+<span class="text-gray-700 text-sm md:text-[15px] font-medium leading-relaxed">
+                                    I confirm that the information provided is accurate and understand that registration does not guarantee employment, income, scholarships, or other opportunities.
+                                </span>
+</label>
+<button class="w-full bg-[#0f3b2a] text-white py-4 md:py-5 rounded-xl font-bold text-[15px] md:text-lg hover:bg-[#1a513b] transition-all shadow-md flex justify-center items-center gap-2" type="submit">
+                                Register for Growth OS Students
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</div></main><footer class="bg-[#082d20] text-white pt-14 pb-7 px-5 md:px-10" id="growth-footer">
+<div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+<div><img alt="Growth OS" class="growth-logo-footer" src="assets/growth-os-logo.png"/><p class="text-sm leading-7 text-white/70 max-w-xs">Learn. Earn. Build. Grow. Practical skills, opportunities and support for your next step.</p><div class="flex gap-3 mt-6 text-lg">
+<a aria-label="LinkedIn" class="social-link" href="https://www.linkedin.com/" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+<a aria-label="Instagram" class="social-link" href="https://www.instagram.com/growth_os1?utm_source=qr&amp;exln=MWx4eXlkbXhieDEzdQ==" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+<a aria-label="Facebook" class="social-link" href="https://www.facebook.com/" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+<a aria-label="TikTok" class="social-link" href="https://www.tiktok.com/@growthos2?_r=1&amp;_t=ZS-9AzZIBxPrF8" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+</div></div>
+<div><h3 class="font-bold mb-4">Explore</h3><ul class="space-y-3 text-sm text-white/70"><li><a class="hover:text-white" href="#home" onclick="event.preventDefault();navigate('home-page')">Home</a></li><li><a class="hover:text-white" href="#choose" onclick="event.preventDefault();navigate('choose-page')">Get Started</a></li><li><a class="hover:text-white" href="https://www.growthos.name.ng/" rel="noopener noreferrer" target="_blank">Growth OS Platform</a></li></ul></div>
+<div><h3 class="font-bold mb-4">Our Locations</h3><ul class="space-y-3 text-sm text-white/70"><li><i class="fa-solid fa-location-dot text-[#48c995] mr-2"></i>Nigeria</li><li><i class="fa-solid fa-location-dot text-[#48c995] mr-2"></i>Kenya</li><li><i class="fa-solid fa-location-dot text-[#48c995] mr-2"></i>Ghana</li><li><i class="fa-solid fa-location-dot text-[#48c995] mr-2"></i>South Africa</li></ul></div>
+<div><h3 class="font-bold mb-4">Contact Us</h3><ul class="space-y-3 text-sm text-white/75"><li><a class="hover:text-white" href="tel:+2349015000385">+234 901 500 0385</a></li><li><a class="hover:text-white" href="tel:+2347075469283">+234 707 546 9283</a></li><li><a class="hover:text-white" href="tel:+2348055398758">+234 805 539 8758</a></li></ul><a class="inline-flex items-center gap-2 mt-5 text-sm font-semibold text-[#48c995] hover:text-white" href="https://wa.me/2349015000385" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chat with us on WhatsApp</a></div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-white/15 mt-12 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-white/50"><p>© 2026 Growth OS. An Initiative of 1999 Ideas Concepts Innovations and Creations.</p><p>Building skills. Creating opportunities. Growing futures.</p></div>
+</footer><a aria-label="Chat with Growth OS on WhatsApp" class="whatsapp-float" href="https://wa.me/+2347075469283" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-whatsapp"></i></a><script>
+/* Growth OS interactions
+ * Registration submissions are sent to the Growth OS Google Apps Script endpoint.
+ */
+(function () {
+  "use strict";
+
+  const REGISTRATION_API_URL = "https://script.google.com/macros/s/AKfycbxJJsfUhuPTtKwCx-YUtDmHR03GKkt2wS3fWpzZrg4IL0mKlk1-t8_umBecjvYT_BkB/exec";
+
+  function navigate(pageId) {
+    const routes = {
+      "home-page": "index.html",
+      "choose-page": "index.html#pathways",
+      "student-page": "students.html",
+      "nysc-page": "nysc.html"
+    };
+    window.location.href = routes[pageId] || "index.html";
+  }
+  window.navigate = navigate;
+  window.closeMobileMenu = function () {
+    const menu = document.getElementById("mobile-menu");
+    const toggle = document.getElementById("menu-toggle");
+    if (menu) { menu.classList.add("hidden"); menu.classList.remove("flex"); }
+    if (toggle) { toggle.setAttribute("aria-expanded", "false"); toggle.innerHTML = '<i class="fa-solid fa-bars"></i>'; toggle.setAttribute("aria-label", "Open navigation menu"); }
+  };
+
+  function showMessage(form, message, type) {
+    let notice = form.querySelector(".form-feedback");
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.className = "form-feedback rounded-xl p-4 text-sm font-medium mb-5";
+      notice.setAttribute("role", "status");
+      notice.setAttribute("aria-live", "polite");
+      form.prepend(notice);
+    }
+    notice.className = "form-feedback rounded-xl p-4 text-sm font-medium mb-5 " +
+      (type === "success" ? "bg-green-50 text-green-800 border border-green-200" :
+        "bg-red-50 text-red-700 border border-red-200");
+    notice.textContent = message;
+    notice.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function getFormData(form) {
+    const data = {};
+    new FormData(form).forEach((value, key) => {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        if (!Array.isArray(data[key])) data[key] = [data[key]];
+        data[key].push(value);
+      } else {
+        data[key] = value;
+      }
+    });
+    data.submittedAt = new Date().toISOString();
+    return data;
+  }
+
+  async function setupRegistrationForm(formId, registrationType, minInterests) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    const interestBoxes = Array.from(form.querySelectorAll('input[name="interests"]'));
+    interestBoxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const notice = form.querySelector(".form-feedback");
+        if (notice && notice.classList.contains("bg-red-50")) notice.remove();
+      });
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const selectedInterests = interestBoxes.filter((box) => box.checked);
+      if (selectedInterests.length < minInterests) {
+        showMessage(form, `Please select at least ${minInterests} interests before submitting.`, "error");
+        const firstUnchecked = interestBoxes.find((box) => !box.checked);
+        if (firstUnchecked) firstUnchecked.focus({ preventScroll: true });
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton ? submitButton.textContent.trim() : "";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+      }
+
+      try {
+        const record = getFormData(form);
+        record.type = registrationType;
+
+        // Apps Script ContentService does not expose configurable CORS headers.
+        // A text/plain no-cors POST avoids the browser preflight, but the browser
+        // cannot read the final response to verify that the spreadsheet write succeeded.
+        await fetch(REGISTRATION_API_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
+          body: JSON.stringify(record)
+        });
+
+        showMessage(
+          form,
+          "Your registration request has been sent. This page cannot verify Google's final spreadsheet response, so please contact the Growth OS team if you do not receive a follow-up.",
+          "success"
+        );
+        form.reset();
+
+        if (registrationType === "nysc") {
+          const deploymentInput = form.querySelector('input[name="deployment"]');
+          if (deploymentInput) {
+            deploymentInput.required = false;
+            deploymentInput.placeholder = "For serving corps members (e.g. Lagos)";
+          }
+        }
+      } catch (error) {
+        console.error("Growth OS registration submission failed:", error);
+        showMessage(
+          form,
+          "We couldn't send your registration. Please check your internet connection and try again. If the problem continues, contact the Growth OS team.",
+          "error"
+        );
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText || (formId === "form-student"
+            ? "Register for Growth OS Students"
+            : "Register for Growth OS NYSC");
+        }
+      }
+    });
+  }
+
+  function setupNavigation() {
+    const menuToggle = document.getElementById("menu-toggle");
+    if (menuToggle) menuToggle.addEventListener("click", () => {
+      const menu = document.getElementById("mobile-menu");
+      const isOpen = menu && !menu.classList.contains("hidden");
+      if (!menu) return;
+      menu.classList.toggle("hidden", isOpen);
+      menu.classList.toggle("flex", !isOpen);
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      menuToggle.innerHTML = isOpen ? '<i class="fa-solid fa-bars"></i>' : '<i class="fa-solid fa-xmark"></i>';
+    });
+
+    // Make placeholder navigation links useful without sending visitors to "#".
+    document.querySelectorAll('nav a, footer a').forEach((link) => {
+      const label = link.textContent.trim().toLowerCase();
+      if (label === "home") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          navigate("home-page");
+        });
+      } else if (label === "for you") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          navigate("student-page");
+        });
+      } else if (label === "about") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.location.href = "index.html#about-section";
+        });
+      } else if (label === "faqs") {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          alert("FAQs will be available here soon. Please contact the Growth OS team for assistance.");
+        });
+      } else if (["privacy", "terms", "cookies"].includes(label)) {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          alert(`${label.charAt(0).toUpperCase() + label.slice(1)} information will be published here soon.`);
+        });
+      }
+    });
+
+    // Avoid empty placeholder social links navigating the page to its top.
+    document.querySelectorAll("footer .fa-brands").forEach((icon) => {
+      const link = icon.closest("a");
+      if (link) link.addEventListener("click", (event) => {
+        if (link.getAttribute("href") === "#") {
+          event.preventDefault();
+          alert("Add the official Growth OS social profile URL to enable this link.");
+        }
+      });
+    });
+  }
+
+  function setupPhoneAndYearHints() {
+    const nyscForm = document.getElementById("form-nysc");
+    if (nyscForm) {
+      const statusOptions = nyscForm.querySelectorAll('input[name="nysc_status"]');
+      const deploymentInput = nyscForm.querySelector('input[name="deployment"]');
+      const updateDeploymentRequirement = () => {
+        const status = nyscForm.querySelector('input[name="nysc_status"]:checked')?.value;
+        if (deploymentInput) {
+          deploymentInput.required = status === "Currently serving";
+          deploymentInput.placeholder = status === "Currently serving"
+            ? "Required for serving corps members (e.g. Lagos)"
+            : "For serving corps members (e.g. Lagos)";
+        }
+      };
+      statusOptions.forEach((option) => option.addEventListener("change", updateDeploymentRequirement));
+      updateDeploymentRequirement();
+    }
+
+    document.querySelectorAll('input[name="grad_year"]').forEach((input) => {
+      input.min = input.min || "1950";
+      input.max = input.max || "2045";
+      input.addEventListener("input", () => {
+        if (input.value && (Number(input.value) < Number(input.min) ||
+            Number(input.value) > Number(input.max))) {
+          input.setCustomValidity(`Enter a year between ${input.min} and ${input.max}.`);
+        } else {
+          input.setCustomValidity("");
+        }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupNavigation();
+    setupRegistrationForm("form-student", "student", 2);
+    setupRegistrationForm("form-nysc", "nysc", 2);
+    setupPhoneAndYearHints();
+  });
+})();
+    </script></body></html>
